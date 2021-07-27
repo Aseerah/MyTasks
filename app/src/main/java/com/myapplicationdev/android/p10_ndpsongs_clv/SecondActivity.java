@@ -16,12 +16,15 @@ public class SecondActivity extends AppCompatActivity {
 
 	ListView lv;
     ArrayList<Song> songList;
-	ArrayAdapter adapter;
+//	ArrayAdapter adapter;
 	String moduleCode;
 	int requestCode = 9;
     Button btn5Stars;
 
-	@Override
+    CustomAdapter caNDP;
+
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_second);
@@ -35,8 +38,13 @@ public class SecondActivity extends AppCompatActivity {
         songList = dbh.getAllSongs();
         dbh.close();
 
-		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songList);
-		lv.setAdapter(adapter);
+//		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songList);
+//		lv.setAdapter(adapter);
+
+
+        caNDP = new CustomAdapter(this, R.layout.row, songList);
+
+        lv.setAdapter(caNDP);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,7 +61,7 @@ public class SecondActivity extends AppCompatActivity {
                 DBHelper dbh = new DBHelper(SecondActivity.this);
                 songList.clear();
                 songList.addAll(dbh.getAllSongsByStars(5));
-                adapter.notifyDataSetChanged();
+                caNDP.notifyDataSetChanged();
             }
         });
     }
@@ -66,7 +74,7 @@ public class SecondActivity extends AppCompatActivity {
             songList.clear();
             songList.addAll(dbh.getAllSongs());
             dbh.close();
-            adapter.notifyDataSetChanged();
+            caNDP.notifyDataSetChanged();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
