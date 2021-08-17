@@ -21,6 +21,7 @@
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
+            android:background="@drawable/cat"
             android:layout_height="wrap_content">
 
         </ListView>

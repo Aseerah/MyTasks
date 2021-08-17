@@ -2,25 +2,22 @@ package com.myapplicationdev.android.p10_ndpsongs_clv;
 
 import java.io.Serializable;
 
-public class Song implements Serializable {
+public class Tasks implements Serializable {
 
 	private int id;
 	private String title;
-	private String singers;
 	private int yearReleased;
 	private int stars;
 
-    public Song(String title, String singers, int yearReleased, int stars) {
+    public Tasks(String title, int yearReleased, int stars) {
         this.title = title;
-        this.singers = singers;
         this.yearReleased = yearReleased;
         this.stars = stars;
     }
 
-    public Song(int id, String title, String singers, int yearReleased, int stars) {
+    public Tasks(int id, String title, int yearReleased, int stars) {
         this.id = id;
         this.title = title;
-        this.singers = singers;
         this.yearReleased = yearReleased;
         this.stars = stars;
     }
@@ -29,7 +26,7 @@ public class Song implements Serializable {
         return id;
     }
 
-    public Song setId(int id) {
+    public Tasks setId(int id) {
         this.id = id;
         return this;
     }
@@ -38,25 +35,17 @@ public class Song implements Serializable {
         return title;
     }
 
-    public Song setTitle(String title) {
+    public Tasks setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public String getSingers() {
-        return singers;
-    }
-
-    public Song setSingers(String singers) {
-        this.singers = singers;
-        return this;
-    }
 
     public int getYearReleased() {
         return yearReleased;
     }
 
-    public Song setYearReleased(int yearReleased) {
+    public Tasks setYearReleased(int yearReleased) {
         this.yearReleased = yearReleased;
         return this;
     }
@@ -65,32 +54,32 @@ public class Song implements Serializable {
         return stars;
     }
 
-    public Song setStars(int stars) {
+    public Tasks setStars(int stars) {
         this.stars = stars;
         return this;
     }
-
-    @Override
-    public String toString() {
-        String starsString = "";
-        if (stars == 5){
-            starsString = "* * * * *";
-        } else if (stars == 4){
-            starsString = "* * * *";
-        }else if (stars == 3){
-            starsString = "* * *";
-        }else if (stars == 2){
-            starsString = "* *";
-        }else {
-            starsString = "*";
-        }
+//
+//    @Override
+//    public String toString() {
+//        String starsString = "";
+//        if (stars == 5){
+//            starsString = "* * * * *";
+//        } else if (stars == 4){
+//            starsString = "* * * *";
+//        }else if (stars == 3){
+//            starsString = "* * *";
+//        }else if (stars == 2){
+//            starsString = "* *";
+//        }else {
+//            starsString = "*";
+//        }
 
 //        //or
 //        for(int i = 0; i < stars; i++){
 //            starsString += "*";
 //        }
 //        return title + "\n" + singers + " - " + yearReleased + "\n" + starsString;
-
-        return starsString;
-    }
+//
+//        return starsString;
+//    }
 }

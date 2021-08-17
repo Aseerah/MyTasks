@@ -1,13 +1,15 @@
 package com.myapplicationdev.android.p10_ndpsongs_clv;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 public class SecondActivity extends AppCompatActivity {
 
 	ListView lv;
-    ArrayList<Song> songList;
+    ArrayList<Tasks> tasksList;
 //	ArrayAdapter adapter;
 	String moduleCode;
 	int requestCode = 9;
@@ -35,23 +37,41 @@ public class SecondActivity extends AppCompatActivity {
         btn5Stars = (Button) this.findViewById(R.id.btnShow5Stars);
 
 		DBHelper dbh = new DBHelper(this);
-        songList = dbh.getAllSongs();
+        tasksList = dbh.getAllTask();
         dbh.close();
 
 //		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songList);
 //		lv.setAdapter(adapter);
 
 
-        caNDP = new CustomAdapter(this, R.layout.row, songList);
+        caNDP = new CustomAdapter(this, R.layout.row, tasksList);
 
         lv.setAdapter(caNDP);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
-                i.putExtra("song", songList.get(position));
-                startActivityForResult(i, requestCode);
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(SecondActivity.this);
+                myBuilder.setTitle("Alert!");
+                myBuilder.setMessage("Are you sure you want to modify the task? \n");
+                myBuilder.setCancelable(false);
+
+                myBuilder.setPositiveButton("MODIFY", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
+                        i.putExtra("song", tasksList.get(position));
+                        startActivityForResult(i, requestCode);
+
+                    }
+                });
+                myBuilder.setNegativeButton("CANCEL", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+
             }
         });
 
@@ -59,8 +79,8 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(SecondActivity.this);
-                songList.clear();
-                songList.addAll(dbh.getAllSongsByStars(5));
+                tasksList.clear();
+                tasksList.addAll(dbh.getAllTaskByStars(5));
                 caNDP.notifyDataSetChanged();
             }
         });
@@ -71,8 +91,8 @@ public class SecondActivity extends AppCompatActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == this.requestCode && resultCode == RESULT_OK){
 			DBHelper dbh = new DBHelper(this);
-            songList.clear();
-            songList.addAll(dbh.getAllSongs());
+            tasksList.clear();
+            tasksList.addAll(dbh.getAllTask());
             dbh.close();
             caNDP.notifyDataSetChanged();
 		}
