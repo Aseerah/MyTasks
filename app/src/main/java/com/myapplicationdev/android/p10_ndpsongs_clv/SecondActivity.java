@@ -63,7 +63,7 @@ public class SecondActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
-                        i.putExtra("song", tasksList.get(position));
+                        i.putExtra("task", tasksList.get(position));
                         startActivityForResult(i, requestCode);
 
                     }

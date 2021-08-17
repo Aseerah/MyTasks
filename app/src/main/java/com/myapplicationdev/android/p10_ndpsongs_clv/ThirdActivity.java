@@ -40,7 +40,7 @@ public class ThirdActivity extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        final Tasks currentTasks = (Tasks) i.getSerializableExtra("song");
+        final Tasks currentTasks = (Tasks) i.getSerializableExtra("task");
 
         etID.setText(currentTasks.getId() + "");
         etTitle.setText(currentTasks.getTitle());
@@ -58,6 +58,9 @@ public class ThirdActivity extends AppCompatActivity {
                 int selectedRB = ratingbar.getNumStars();
                 RatingBar ratingbar = (RatingBar) findViewById(selectedRB);
 //                currentTasks.setStars(Integer.parseInt(ratingbar.toString()));
+
+//                int rating = (int) ratingbar.getRating();
+//                currentTasks.setStars(rating);
 
                 int result = dbh.updateTask(currentTasks);
                 if (result > 0) {
@@ -113,6 +116,7 @@ public class ThirdActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 }
