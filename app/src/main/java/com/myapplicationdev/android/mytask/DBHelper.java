@@ -1,4 +1,4 @@
-package com.myapplicationdev.android.p10_ndpsongs_clv;
+package com.myapplicationdev.android.mytask;
 
 import android.content.ContentValues;
 import android.content.Context;

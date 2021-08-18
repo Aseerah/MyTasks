@@ -1,4 +1,4 @@
-package com.myapplicationdev.android.p10_ndpsongs_clv;
+package com.myapplicationdev.android.mytask;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
